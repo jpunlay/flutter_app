@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/login.dart';
 import 'package:flutter_app/widgets/myhomepage.dart';
 
 void main() {
@@ -8,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         primaryIconTheme: IconThemeData(color: Colors.black)
       ),
-      home: const MyHomePage(title: 'Title'),
+      home: Login(),
     );
   }
 }

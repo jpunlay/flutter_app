@@ -42,7 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(
           widget.title,
           style: const TextStyle(
-              fontSize: 30.0, fontFamily: "Billabong", color: Colors.grey),
+              fontSize: 30.0, 
+              fontFamily: "Billabong", 
+              color: Colors.grey
+          ),
         ),
         backgroundColor: Colors.black87,
       ),
