@@ -45,6 +45,8 @@ class _Login extends State<Login> {
     _googleSignIn.signInSilently();
   }
 
+  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+
   Widget _buildBody() {
     final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
         minimumSize: const Size(275, 20),
@@ -91,27 +93,31 @@ class _Login extends State<Login> {
 
     GoogleSignInAccount? user = _currentUser;
     if (user != null) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          ListTile(
-            leading: GoogleUserCircleAvatar(
-              identity: user,
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            ListTile(
+              leading: GoogleUserCircleAvatar(
+                identity: user,
+              ),
+              title: Text(user.displayName ?? ''),
+              subtitle: Text(user.email),
             ),
-            title: Text(user.displayName ?? ''),
-            subtitle: Text(user.email),
-          ),
-          const Text("Signed in successfully."),
-          Text(_contactText),
-          // ElevatedButton(
-          //   child: const Text('SIGN OUT'),
-          //   onPressed: _handleSignOut,
-          // ),
-          // ElevatedButton(
-          //   child: const Text('REFRESH'),
-          //   onPressed: () => _handleGetContact(user),
-          // ),
-        ],
+            ElevatedButton(
+              child: Text(user.toString()),
+              onPressed: () {},
+            ),
+            ElevatedButton(
+              child: const Text('SIGN OUT'),
+              onPressed: _handleSignOut,
+            ),
+            // ElevatedButton(
+            //   child: const Text('REFRESH'),
+            //   onPressed: () => _handleGetContact(user),
+            // ),
+          ],
+        ),
       );
     } else {
       return Column(
