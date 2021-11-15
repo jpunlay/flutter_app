@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/login/apple_button.dart';
+import 'package:flutter_app/widgets/login/google_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -48,49 +50,6 @@ class _Login extends State<Login> {
   Future<void> _handleSignOut() => _googleSignIn.disconnect();
 
   Widget _buildBody() {
-    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
-        minimumSize: const Size(275, 20),
-        primary: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        textStyle: const TextStyle(fontSize: 20),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ));
-
-    ElevatedButton googleLoginButton = ElevatedButton(
-      style: buttonStyle,
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          Image.asset(
-            'assets/images/icons/google/google.png',
-            height: 30,
-            width: 30,
-          ),
-          const SizedBox(width: 12),
-          const Text('Sign in with Google'),
-        ],
-      ),
-      onPressed: _handleSignIn,
-    );
-
-    ElevatedButton appleLoginButton = ElevatedButton(
-      style: buttonStyle,
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          Image.asset(
-            'assets/images/icons/apple/apple.png',
-            height: 30,
-            width: 30,
-          ),
-          const SizedBox(width: 12),
-          const Text('Sign in with Apple'),
-        ],
-      ),
-      onPressed: _handleSignIn,
-    );
-
     GoogleSignInAccount? user = _currentUser;
     if (user != null) {
       return SingleChildScrollView(
@@ -122,13 +81,13 @@ class _Login extends State<Login> {
     } else {
       return Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          const Padding(
+        children: const <Widget>[
+          Padding(
               padding: EdgeInsets.fromLTRB(20, 400, 20, 20),
               child: Text('Sign in', style: TextStyle(fontSize: 22))),
-          googleLoginButton,
-          const SizedBox(height: 20),
-          appleLoginButton
+          GoogleButton(),
+          SizedBox(height: 20),
+          AppleButton()
         ],
       );
     }
