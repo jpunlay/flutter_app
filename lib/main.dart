@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/login.dart';
-import 'package:flutter_app/widgets/myhomepage.dart';
+import 'package:flutter_app/widgets/login/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,8 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
           primarySwatch: Colors.grey,
-          primaryIconTheme: IconThemeData(color: Colors.black)),
-      home: Login(),
+          primaryIconTheme: const IconThemeData(color: Colors.black)),
+      home: const Login(),
     );
   }
 }
