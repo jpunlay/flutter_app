@@ -13,19 +13,19 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 typedef UserCallback = void Function(GoogleSignInAccount val);
 
 class GoogleButton extends StatelessWidget {
-  final UserCallback user;
+  final UserCallback? user;
 
   const GoogleButton({required this.user});
 
   Future<void> _handleSignIn() async {
     try {
-      await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      user!(googleSignInAccount!);
     } catch (error) {
       print(error);
     }
   }
-
-  Future<void> _handleSignOut() => _googleSignIn.disconnect();
 
   @override
   Widget build(BuildContext context) {

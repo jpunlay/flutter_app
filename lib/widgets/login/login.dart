@@ -4,6 +4,15 @@ import 'package:flutter_app/widgets/login/apple_button.dart';
 import 'package:flutter_app/widgets/login/google_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  clientId:
+      '261501057690-qb1gcm5vo7khsikle5oeov9bro89rrh0.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -14,19 +23,28 @@ class Login extends StatefulWidget {
 }
 
 class _Login extends State<Login> {
+  Future<void> _handleSignOut() async {
+    final GoogleSignInAccount? googleSignInAccount =
+        await _googleSignIn.disconnect();
+    print(googleSignInAccount);
+    setState(() {
+      _currentUser = googleSignInAccount;
+    });
+  }
+
   GoogleSignInAccount? _currentUser;
+
   set string(GoogleSignInAccount value) => setState(() => _currentUser = value);
 
-  String _contactText = '';
-
   Widget _buildBody() {
-    if (_currentUser != null) {
-      GoogleSignInAccount user = _currentUser!;
+    GoogleSignInAccount? user = _currentUser;
 
+    if (user != null) {
       return SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
+            const Padding(padding: EdgeInsets.fromLTRB(20, 200, 20, 20)),
             ListTile(
               leading: GoogleUserCircleAvatar(
                 identity: user,
@@ -35,17 +53,9 @@ class _Login extends State<Login> {
               subtitle: Text(user.email),
             ),
             ElevatedButton(
-              child: Text(user.toString()),
+              child: Text(user.toString(), style: TextStyle(fontSize: 20)),
               onPressed: () {},
-            ),
-            ElevatedButton(
-                child: const Text('SIGN OUT'),
-                onPressed: () {} // _handleSignOut,
-                ),
-            // ElevatedButton(
-            //   child: const Text('REFRESH'),
-            //   onPressed: () => _handleGetContact(user),
-            // ),
+            )
           ],
         ),
       );
@@ -57,8 +67,9 @@ class _Login extends State<Login> {
               padding: EdgeInsets.fromLTRB(20, 400, 20, 20),
               child: Text('Sign in', style: TextStyle(fontSize: 22))),
           GoogleButton(user: (user) => setState(() => _currentUser = user)),
+          // a,
           const SizedBox(height: 20),
-          AppleButton()
+          const AppleButton()
         ],
       );
     }
