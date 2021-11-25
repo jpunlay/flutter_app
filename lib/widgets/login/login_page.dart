@@ -13,9 +13,8 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 
 final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
   minimumSize: const Size(275, 20),
-  primary: Colors.white,
+  primary: const Color.fromRGBO(255, 255, 255, 1),
   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  textStyle: const TextStyle(fontSize: 20),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(30.0),
   ),
@@ -51,9 +50,12 @@ class _Login extends State<Login> {
             'assets/images/icons/google/google.png',
             height: 30,
             width: 30,
+            fit: BoxFit.fitHeight,
           ),
           const SizedBox(width: 12),
-          const Text('Sign in with Google'),
+          const DefaultTextStyle(
+              style: TextStyle(fontSize: 18, color: Color.fromRGBO(0, 0, 0, 1)),
+              child: Text('Sign in with Google')),
         ],
       ),
       onPressed: _handleSignIn,
@@ -68,20 +70,23 @@ class _Login extends State<Login> {
             'assets/images/icons/apple/apple.png',
             height: 30,
             width: 30,
+            fit: BoxFit.fitHeight,
           ),
           const SizedBox(width: 12),
-          const Text('Sign in with Apple'),
+          const DefaultTextStyle(
+              style: TextStyle(fontSize: 18, color: Color.fromRGBO(0, 0, 0, 1)),
+              child: Text('Sign in with Apple ')),
         ],
       ),
-      onPressed: () {}, //_handleSignIn,
+      onPressed: _handleSignIn,
     );
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         const Padding(
-            padding: EdgeInsets.fromLTRB(20, 400, 20, 20),
-            child: Text('Sign in', style: TextStyle(fontSize: 22)),
+          padding: EdgeInsets.fromLTRB(20, 400, 20, 20),
+          child: Text('Sign in', style: TextStyle(fontSize: 22)),
         ),
         googleButton,
         const SizedBox(height: 20),
@@ -92,11 +97,9 @@ class _Login extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ConstrainedBox(
-        constraints: const BoxConstraints.expand(),
-        child: _buildBody(),
-      ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints.expand(),
+      child: _buildBody(),
     );
   }
 }
