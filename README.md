@@ -3,7 +3,7 @@
 A new Flutter project.
 * `flutter run`
 
-<img src="assets/gifs/app_gif.gif" alt="drawing" height="300"/>
+<img src="assets/gifs/app_gif.gif" alt="drawing" height="500"/>
 
 
 ## Getting Started
