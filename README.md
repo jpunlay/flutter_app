@@ -1,6 +1,10 @@
-# flutter_app
+# Template Flutter App
 
 A new Flutter project.
+- `flutter run`
+
+![](assets/gifs/app_gif.gif)
+
 
 ## Getting Started
 
