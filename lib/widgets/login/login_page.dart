@@ -22,7 +22,11 @@ final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
 
 class Login extends StatefulWidget {
   final Function setIsLoggedIn;
-  const Login({Key? key, required this.setIsLoggedIn}) : super(key: key);
+  final Function setUserAccount;
+
+  const Login(
+      {Key? key, required this.setIsLoggedIn, required this.setUserAccount})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _Login();
@@ -34,9 +38,9 @@ class Login extends StatefulWidget {
 class _Login extends State<Login> {
   Future<void> _handleSignIn() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
+      GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
       widget.setIsLoggedIn(true);
+      widget.setUserAccount(googleSignInAccount);
       print(googleSignInAccount!.displayName);
     } catch (error) {
       print(error);
