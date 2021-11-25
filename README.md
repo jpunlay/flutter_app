@@ -1,9 +1,9 @@
 # Template Flutter App
 
 A new Flutter project.
-- `flutter run`
+* `flutter run`
 
-![](assets/gifs/app_gif.gif)
+<img src="assets/gifs/app_gif.gif" alt="drawing" height="300"/>
 
 
 ## Getting Started
