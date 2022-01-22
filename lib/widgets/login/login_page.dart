@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   clientId:
@@ -36,15 +37,28 @@ class Login extends StatefulWidget {
 }
 
 class _Login extends State<Login> {
-  Future<void> _handleSignIn() async {
+  Future<void> _handleGoogleSignIn() async {
     try {
       GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-      widget.setIsLoggedIn(true);
-      widget.setUserAccount(googleSignInAccount);
-      print(googleSignInAccount!.displayName);
+      if (googleSignInAccount != null) {
+        widget.setIsLoggedIn(true);
+        widget.setUserAccount(googleSignInAccount);
+      }
     } catch (error) {
       print(error);
     }
+  }
+
+  Future<void> _handleAppleSignIn() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+
+    print(credential);
   }
 
   Widget _buildBody() {
@@ -65,7 +79,7 @@ class _Login extends State<Login> {
               child: Text('Sign in with Google')),
         ],
       ),
-      onPressed: _handleSignIn,
+      onPressed: _handleGoogleSignIn,
     );
 
     ElevatedButton appleButton = ElevatedButton(
@@ -85,7 +99,7 @@ class _Login extends State<Login> {
               child: Text('Sign in with Apple ')),
         ],
       ),
-      onPressed: _handleSignIn,
+      onPressed: _handleAppleSignIn,
     );
 
     return Column(
