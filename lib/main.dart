@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/widgets/login/login_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+const Color black = Color.fromRGBO(0, 0, 0, 1);
+
 void main() {
   runApp(
     const MaterialApp(
@@ -55,6 +57,7 @@ class _AppState extends State<App> {
       );
     } else {
       return Scaffold(
+        backgroundColor: black,
         // Login page
         body: Login(
             setIsLoggedIn: _setIsLoggedIn, setUserAccount: _setUserAccount),

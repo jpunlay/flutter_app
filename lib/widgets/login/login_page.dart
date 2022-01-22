@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+const Color lightGrey = Color.fromRGBO(211, 211, 211, 1);
+const Color darkGrey = Color.fromRGBO(36, 36, 36, 1);
+const Color white = Color.fromRGBO(255, 255, 255, 1);
+
 GoogleSignIn _googleSignIn = GoogleSignIn(
   clientId:
       '261501057690-qb1gcm5vo7khsikle5oeov9bro89rrh0.apps.googleusercontent.com',
@@ -14,7 +18,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 
 final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
   minimumSize: const Size(275, 20),
-  primary: const Color.fromRGBO(255, 255, 255, 1),
+  primary: darkGrey,
   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(30.0),
@@ -57,7 +61,6 @@ class _Login extends State<Login> {
         AppleIDAuthorizationScopes.fullName,
       ],
     );
-
     print(credential);
   }
 
@@ -75,7 +78,7 @@ class _Login extends State<Login> {
           ),
           const SizedBox(width: 12),
           const DefaultTextStyle(
-              style: TextStyle(fontSize: 18, color: Color.fromRGBO(0, 0, 0, 1)),
+              style: TextStyle(fontSize: 18, color: white),
               child: Text('Sign in with Google')),
         ],
       ),
@@ -95,7 +98,7 @@ class _Login extends State<Login> {
           ),
           const SizedBox(width: 12),
           const DefaultTextStyle(
-              style: TextStyle(fontSize: 18, color: Color.fromRGBO(0, 0, 0, 1)),
+              style: TextStyle(fontSize: 18, color: white),
               child: Text('Sign in with Apple ')),
         ],
       ),
@@ -106,8 +109,11 @@ class _Login extends State<Login> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         const Padding(
-          padding: EdgeInsets.fromLTRB(20, 400, 20, 20),
-          child: Text('Sign in', style: TextStyle(fontSize: 22)),
+          padding: EdgeInsets.fromLTRB(20, 480, 20, 20),
+          child: Text(
+            'Sign in',
+            style: TextStyle(fontSize: 22, color: white),
+          ),
         ),
         googleButton,
         const SizedBox(height: 20),
